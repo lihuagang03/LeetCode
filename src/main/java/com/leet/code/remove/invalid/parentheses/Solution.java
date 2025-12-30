@@ -44,7 +44,7 @@ public class Solution {
             if (c == '(') {
                 l++;
             } else if (c == ')') {
-                if (l != 0) {
+                if (l > 0) {
                     l--;
                 } else {
                     r++;
@@ -69,7 +69,7 @@ public class Solution {
         return new ArrayList<>(set);
     }
 
-    void dfs(int u, String cur, int l, int r, int score) {
+    private void dfs(int u, String cur, int l, int r, int score) {
         // 递归终止条件
         if (l < 0 || r < 0 || score < 0 || score > max) {
             return;
@@ -80,7 +80,7 @@ public class Solution {
                 set.add(cur);
             }
         }
-        // 循环终止条件
+        // 字符串越界
         if (u == n) {
             return;
         }
