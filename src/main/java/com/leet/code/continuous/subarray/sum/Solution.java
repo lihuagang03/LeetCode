@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * TODO
+ * 连续的子数组和
  *
  * @author lihuagang
  */
