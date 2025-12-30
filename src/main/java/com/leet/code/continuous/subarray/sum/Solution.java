@@ -4,7 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 连续的子数组和
+ * <a href="https://leetcode.cn/problems/continuous-subarray-sum/description/">
+ *     523. 连续的子数组和</a>
  *
  * @author lihuagang
  */
