@@ -69,7 +69,7 @@ public class Solution {
                 int sum = num + nums[left] + nums[right];
 
                 if (sum == 0) {
-                    // 当 nums[i]+nums[L]+nums[R]==0，找到一个新的解法
+                    // 找到一个解法
                     result.add(Arrays.asList(num, nums[left], nums[right]));
 
                     // 执行循环，判断左界和右界是否和下一位置重复，去除重复解
@@ -84,10 +84,20 @@ public class Solution {
                     left++;
                     right--;
                 } else if (sum > 0) {
+                    // 执行循环，判断左界和右界是否和下一位置重复，去除重复解
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
+
                     // 若和大于 0，说明 nums[R] 太大，R 左移
                     right--;
                 } else {
                     // sum < 0
+                    // 执行循环，判断左界和右界是否和下一位置重复，去除重复解
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+
                     // 若和小于 0，说明 nums[L] 太小，L 右移
                     left++;
                 }
