@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 /**
  * <a href="https://pintia.cn/problem-sets/2004497238921478144/exam/problems/type/7?problemSetProblemId=2004497238955032578">
- *     7.03 三数之和</a>
+ * 7.03 三数之和</a>
  * <a href="https://leetcode.cn/problems/3sum/description/">
- *     15. 三数之和</a>
+ * 15. 三数之和</a>
  *
  * @author lihuagang
  */
@@ -15,18 +15,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        while (in.hasNextLine()) {
-            String str = in.nextLine();
-            String[] numArray = str.split(" ");
-
-            int[] nums = new int[numArray.length];
-            for (int i = 0; i < numArray.length; i++) {
-                nums[i] = Integer.parseInt(numArray[i]);
-            }
-
-            int result = threeSum(nums);
-            System.out.println(result);
+        if (!in.hasNextLine()) {
+            return;
         }
+
+        String str = in.nextLine();
+        String[] numArray = str.split(" ");
+
+        int[] nums = new int[numArray.length];
+        for (int i = 0; i < numArray.length; i++) {
+            nums[i] = Integer.parseInt(numArray[i]);
+        }
+
+        int result = threeSum(nums);
+        System.out.println(result);
     }
 
     private static int threeSum(int[] nums) {
