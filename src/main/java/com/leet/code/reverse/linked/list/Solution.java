@@ -1,4 +1,4 @@
-package exam.problems.reverse.linked.list;
+package com.leet.code.reverse.linked.list;
 
 /**
  * <a href="https://leetcode.cn/problems/reverse-linked-list-ii/description/">
