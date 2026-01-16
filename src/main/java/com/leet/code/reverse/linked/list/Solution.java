@@ -14,7 +14,7 @@ public class Solution {
         ListNode dummyHead = new ListNode(-1, head);
 
         ListNode prev = dummyHead;
-        ListNode cur = head;
+        ListNode cur = prev.next;
         int i = 1;
         while (i++ < left) {
             prev = cur;
