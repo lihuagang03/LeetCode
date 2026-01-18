@@ -11,28 +11,23 @@ import java.util.Set;
  * 523. 连续的子数组和</a>
  */
 public class Main {
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        if (!in.hasNextLine()) {
-            return;
-        }
-
-        String numLine = in.nextLine();
+        String input = in.nextLine();
         int k = in.nextInt();
 
-        String[] numArray = numLine.split(",");
+        String[] parts = input.split(",");
 
-        int length = numArray.length;
-        int[] nums = new int[length];
+        int length = parts.length;
+        int[] numbers = new int[length];
         for (int i = 0; i < length; i++) {
-            nums[i] = Integer.parseInt(numArray[i]);
+            numbers[i] = Integer.parseInt(parts[i]);
         }
 
         // 前缀和
         int[] sums = new int[length + 1];
         for (int i = 1; i <= length; i++) {
-            sums[i] = sums[i - 1] + nums[i - 1];
+            sums[i] = sums[i - 1] + numbers[i - 1];
         }
 
         // 同余定理
@@ -47,5 +42,4 @@ public class Main {
         }
         System.out.println(0);
     }
-
 }

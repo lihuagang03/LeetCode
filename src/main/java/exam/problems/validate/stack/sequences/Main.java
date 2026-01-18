@@ -17,9 +17,12 @@ public class Main {
         Scanner in = new Scanner(System.in);
         String push = in.nextLine();
         String pop = in.nextLine();
+
         int[] pushed = toArray(push);
         int[] popped = toArray(pop);
+
         boolean result = canJump(pushed, popped);
+
         System.out.println(result);
     }
 
@@ -35,13 +38,12 @@ public class Main {
         return deque.isEmpty();
     }
 
-    private static int[] toArray(String line) {
-        String[] array = line.split(",");
-        int[] nums = new int[array.length];
-        for (int i = 0; i < array.length; i++) {
-            nums[i] = Integer.parseInt(array[i]);
+    private static int[] toArray(String input) {
+        String[] parts = input.split(",");
+        int[] numbers = new int[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            numbers[i] = Integer.parseInt(parts[i]);
         }
-        return nums;
+        return numbers;
     }
-
 }

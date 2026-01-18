@@ -13,28 +13,26 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        while (in.hasNextLine()) {
-            String line = in.nextLine();
+        String input = in.nextLine();
 
-            String[] strings = line.split(",");
-            int[] nums = new int[strings.length];
-            for (int i = 0; i < strings.length; i++) {
-                nums[i] = Integer.parseInt(strings[i]);
-            }
-
-            boolean jump = canJump(nums);
-            System.out.println(jump);
+        String[] parts = input.split(",");
+        int[] numbers = new int[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            numbers[i] = Integer.parseInt(parts[i]);
         }
+
+        boolean jump = canJump(numbers);
+        System.out.println(jump);
     }
 
-    public static boolean canJump(int[] nums) {
+    public static boolean canJump(int[] numbers) {
         int dp = 0;
-        int endIndex = nums.length - 1;
-        for (int i = 0; i < nums.length; i++) {
+        int endIndex = numbers.length - 1;
+        for (int i = 0; i < numbers.length; i++) {
             if (i > dp) {
                 return false;
             }
-            dp = Math.max(dp, i + nums[i]);
+            dp = Math.max(dp, i + numbers[i]);
             if (dp >= endIndex) {
                 return true;
             }
