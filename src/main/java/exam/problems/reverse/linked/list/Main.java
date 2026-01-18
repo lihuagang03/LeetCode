@@ -13,26 +13,25 @@ import java.util.Scanner;
  * @author lihuagang
  */
 public class Main {
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
 
         // 第一行包含头节点地址，总节点数量 N 以及常数 K。
-        String line = in.nextLine();
-        String[] strings = line.split(" ");
-        String headAddress = strings[0];
-        int n = Integer.parseInt(strings[1]);
-        int k = Integer.parseInt(strings[2]);
+        String[] parts = input.split(" ");
+        String headAddress = parts[0];
+        int n = Integer.parseInt(parts[1]);
+        int k = Integer.parseInt(parts[2]);
 
         Map<String, ListNode> addressNodeMap = new HashMap<>();
 
         while (in.hasNextLine()) {
-            line = in.nextLine();
-            if ("".equals(line)) {
+            input = in.nextLine();
+            if ("".equals(input)) {
                 break;
             }
-            strings = line.split(" ");
-            ListNode node = new ListNode(strings[0], Integer.parseInt(strings[1]), strings[2]);
+            parts = input.split(" ");
+            ListNode node = new ListNode(parts[0], Integer.parseInt(parts[1]), parts[2]);
             addressNodeMap.put(node.address, node);
         }
 
@@ -63,7 +62,7 @@ public class Main {
             tailNext = head.next;
         }
 
-        // 打印链接
+        // 打印链表
         ListNode cur = dummyHead.next;
         while (cur != null) {
             System.out.print(cur);
@@ -135,5 +134,4 @@ public class Main {
             return address + " " + data + " " + nextAddress;
         }
     }
-
 }
