@@ -1,4 +1,4 @@
-package exam.problems.reverse.linked.list;
+package exam.problems.reorder.list;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,10 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * <a href="https://pintia.cn/problem-sets/2004497238921478144/exam/problems/type/7?problemSetProblemId=2004497238955032580">
- *     7.05 分段反转链表</a>
- * <a href="https://leetcode.cn/problems/reverse-linked-list-ii/description/">
- *     92. 反转链表 II</a>
+ * <a href="https://pintia.cn/problem-sets/2004497238921478144/exam/problems/type/7?problemSetProblemId=2004497238955032586">
+ *     7.11 按格式重排链表</a>
  *
  * @author lihuagang
  */
@@ -18,12 +16,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        // 第一行包含头节点地址，总节点数量 N 以及常数 K。
-        // 1≤N≤100000，1≤K≤N 。
-        // 节点地址用一个 5 位非负整数表示（可能有前导 0），NULL 用 -1 表示。
+        // 第一行包含头节点地址，总节点数量 N （1≤N≤100000）
+        // 节点地址用一个 5 位非负整数表示（可能有前导 0），空地址 NULL 用 −1 表示。
         String head = in.next();
         int n = in.nextInt();
-        int k = in.nextInt();
 
         Map<String, Node> map = new HashMap<>(n * 4 / 3 + 1);
 
@@ -43,20 +39,23 @@ public class Main {
             cur = node.next;
         }
 
-        // 2.分段反转链表
-        int it = n / k;
-        for (int i = 0; i < it; i++) {
-            int left = i * k;
-            int right = left + k - 1;
-            while (left < right) {
-                Node ln = list.get(left);
-                Node rn = list.get(right);
-                list.set(left, rn);
-                list.set(right, ln);
-                left++;
-                right--;
-            }
+        // 2.按格式重排链表
+        List<Node> result = new ArrayList<>(n);
+        int left = 0;
+        int right = n - 1;
+        while (left < right) {
+            Node ln = list.get(left);
+            Node rn = list.get(right);
+            result.add(rn);
+            result.add(ln);
+            left++;
+            right--;
         }
+        // 奇数个
+        if (left == right) {
+            result.add(list.get(left));
+        }
+        list = result;
 
         // 3.重新设置 next 并输出
         int end = n - 1;
@@ -72,25 +71,15 @@ public class Main {
         }
     }
 
-    /**
-     * 接下来 N 行，每行描述一个节点的信息，格式如下：
-     * Address Data Next
-     * 其中 Address 是节点地址，Data 是一个绝对值不超过100000的整数，Next 是下一个节点的地址。
-     */
     private static class Node {
         String address;
         int data;
         String next;
 
-        Node(String address, int data, String next) {
+        public Node(String address, int data, String next) {
             this.address = address;
             this.data = data;
             this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return address + " " + data + " " + next;
         }
     }
 }

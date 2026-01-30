@@ -23,7 +23,7 @@ public class Main {
         String head = in.next();
         int n = in.nextInt();
 
-        Map<String, Node> map = new HashMap<>();
+        Map<String, Node> map = new HashMap<>(n * 4 / 3 + 1);
 
         for (int i = 0; i < n; i++) {
             String address = in.next();
@@ -32,7 +32,7 @@ public class Main {
             map.put(address, new Node(address, data, next));
         }
 
-        // 1️⃣ 按 Next 指针还原链表顺序
+        // 1.按 Next 指针还原链表顺序
         List<Node> list = new ArrayList<>(n);
         String cur = head;
         while (!cur.equals("-1")) {
@@ -41,7 +41,7 @@ public class Main {
             cur = node.next;
         }
 
-        // 2️⃣ 过滤：只保留出现 1 次或 2 次的元素
+        // 2.过滤：只保留出现 1 次或 2 次的元素
         List<Node> result = new ArrayList<>(n);
         int i = 0;
         while (i < n) {
@@ -63,10 +63,10 @@ public class Main {
             i = j;
         }
 
-        // 3️⃣ 重新设置 next 并输出
-        int rn = result.size();
-        for (int k = 0; k < rn; k++) {
-            if (k < rn - 1) {
+        // 3.重新设置 next 并输出
+        int end = n - 1;
+        for (int k = 0; k < n; k++) {
+            if (k < end) {
                 result.get(k).next = result.get(k + 1).address;
             } else {
                 result.get(k).next = "-1";
@@ -74,7 +74,6 @@ public class Main {
         }
         for (Node node : result) {
             System.out.printf("%s %d %s\n", node.address, node.data, node.next);
-//            System.out.println(node);
         }
     }
 
@@ -92,11 +91,6 @@ public class Main {
             this.address = address;
             this.data = data;
             this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return address + " " + data + " " + next;
         }
     }
 }
