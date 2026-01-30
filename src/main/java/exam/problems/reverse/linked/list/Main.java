@@ -1,6 +1,8 @@
 package exam.problems.reverse.linked.list;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -15,97 +17,59 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
 
         // 第一行包含头节点地址，总节点数量 N 以及常数 K。
-        String[] parts = input.split(" ");
-        String headAddress = parts[0];
-        int n = Integer.parseInt(parts[1]);
-        int k = Integer.parseInt(parts[2]);
+        // 1≤N≤100000，1≤K≤N 。
+        // 节点地址用一个 5 位非负整数表示（可能有前导 0），NULL 用 -1 表示。
+        String head = in.next();
+        int n = in.nextInt();
+        int k = in.nextInt();
 
-        Map<String, ListNode> addressNodeMap = new HashMap<>();
+        Map<String, Node> map = new HashMap<>();
 
-        while (in.hasNextLine()) {
-            input = in.nextLine();
-            if ("".equals(input)) {
-                break;
-            }
-            parts = input.split(" ");
-            ListNode node = new ListNode(parts[0], Integer.parseInt(parts[1]), parts[2]);
-            addressNodeMap.put(node.address, node);
+        for (int i = 0; i < n; i++) {
+            String address = in.next();
+            int data = in.nextInt();
+            String next = in.next();
+            map.put(address, new Node(address, data, next));
         }
 
-        // 构建链表
-        ListNode dummyHead = buildList(headAddress, addressNodeMap);
-
-        // 分段反转链表
-        ListNode prev = dummyHead;
-        ListNode head = prev.next;
-        ListNode tailNext = head.next;
-        // 迭代遍历地反转
-        int iterationNumber = n / k;
-        for (int i = 0; i < iterationNumber; i++) {
-            int j = 1;
-            while (j++ < k) {
-                tailNext = tailNext.next;
-            }
-
-            prev.next = reverseList(head, tailNext);
-            prev.nextAddress = prev.next.address;
-
-            prev = head;
-            head = prev.next;
-            if (head == null) {
-                prev.nextAddress = "-1";
-                break;
-            }
-            tailNext = head.next;
+        // 1.按 Next 指针还原链表顺序
+        List<Node> list = new ArrayList<>(n);
+        String cur = head;
+        while (!cur.equals("-1")) {
+            Node node = map.get(cur);
+            list.add(node);
+            cur = node.next;
         }
 
-        // 打印链表
-        ListNode cur = dummyHead.next;
-        while (cur != null) {
-            System.out.print(cur);
-            cur = cur.next;
-            if (cur != null) {
-                System.out.println();
+        // 2.分段反转链表
+        int it = n / k;
+        for (int i = 0; i < it; i++) {
+            int left = i * k;
+            int right = left + k - 1;
+            while (left < right) {
+                Node ln = list.get(left);
+                Node rn = list.get(right);
+                list.set(left, rn);
+                list.set(right, ln);
+                left++;
+                right--;
             }
         }
-    }
 
-    private static ListNode reverseList(ListNode head, ListNode tailNext) {
-        ListNode prev = tailNext;
-        ListNode cur = head;
-        while (cur != tailNext) {
-            ListNode next = cur.next;
-            cur.next = prev;
-            // 下一个节点的地址
-            if (prev != null) {
-                cur.nextAddress = prev.address;
+        // 3.重新设置 next 并输出
+        int size = list.size();
+        int end = size - 1;
+        for (int i = 0; i < size; i++) {
+            if (i < end) {
+                list.get(i).next = list.get(i + 1).address;
+            } else {
+                list.get(i).next = "-1";
             }
-            prev = cur;
-            cur = next;
         }
-        return prev;
-    }
-
-    private static ListNode buildList(String nextAddress, Map<String, ListNode> addressNodeMap) {
-        // 哑结点
-        ListNode dummyHead = new ListNode();
-        ListNode prev = dummyHead;
-
-        while (true) {
-            // 节点地址用一个 5 位非负整数表示（可能有前导 0），NULL 用 −1 表示。
-            if ("−1".equals(nextAddress)) {
-                return dummyHead;
-            }
-            ListNode node = addressNodeMap.get(nextAddress);
-            if (node == null) {
-                return dummyHead;
-            }
-            prev.next = node;
-            prev = prev.next;
-            nextAddress = node.nextAddress;
+        for (Node node : list) {
+            System.out.printf("%s %d %s\n", node.address, node.data, node.next);
         }
     }
 
@@ -114,24 +78,20 @@ public class Main {
      * Address Data Next
      * 其中 Address 是节点地址，Data 是一个绝对值不超过100000的整数，Next 是下一个节点的地址。
      */
-    private static class ListNode {
+    private static class Node {
         String address;
         int data;
-        String nextAddress;
-        ListNode next;
+        String next;
 
-        ListNode() {
-        }
-
-        ListNode(String address, int data, String nextAddress) {
+        Node(String address, int data, String next) {
             this.address = address;
             this.data = data;
-            this.nextAddress = nextAddress;
+            this.next = next;
         }
 
         @Override
         public String toString() {
-            return address + " " + data + " " + nextAddress;
+            return address + " " + data + " " + next;
         }
     }
 }
