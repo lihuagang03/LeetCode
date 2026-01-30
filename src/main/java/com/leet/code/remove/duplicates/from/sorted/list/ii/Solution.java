@@ -18,7 +18,7 @@ public class Solution {
         ListNode slow = dummy;
         ListNode prev = head;
         ListNode fast = head.next;
-        // 重复数字标识
+        // 重复数字计数器
         int dupNum = 0;
         while (fast != null) {
             if (fast.val == prev.val) {

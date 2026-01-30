@@ -27,9 +27,9 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             String address = in.next();
-            int val = in.nextInt();
+            int data = in.nextInt();
             String next = in.next();
-            map.put(address, new Node(address, val, next));
+            map.put(address, new Node(address, data, next));
         }
 
         // 1️⃣ 按 Next 指针还原链表顺序
@@ -46,9 +46,9 @@ public class Main {
         int i = 0;
         while (i < n) {
             int j = i;
-            int val = list.get(i).val;
+            int data = list.get(i).data;
 
-            while (j < n && list.get(j).val == val) {
+            while (j < n && list.get(j).data == data) {
                 j++;
             }
             int count = j - i;
@@ -73,7 +73,7 @@ public class Main {
             }
         }
         for (Node node : result) {
-            System.out.printf("%s %d %s\n", node.address, node.val, node.next);
+            System.out.printf("%s %d %s\n", node.address, node.data, node.next);
 //            System.out.println(node);
         }
     }
@@ -85,21 +85,18 @@ public class Main {
      */
     private static class Node {
         String address;
-        int val;
+        int data;
         String next;
 
-        Node() {
-        }
-
-        Node(String address, int val, String next) {
+        Node(String address, int data, String next) {
             this.address = address;
-            this.val = val;
+            this.data = data;
             this.next = next;
         }
 
         @Override
         public String toString() {
-            return address + " " + val + " " + next;
+            return address + " " + data + " " + next;
         }
     }
 }
