@@ -26,28 +26,7 @@ public class Main {
         }
         String t2 = in.next();
 
-        if (t1 == null || t1.isEmpty() || t2 == null || t2.isEmpty()) {
-            System.out.println(0);
-            return;
-        }
-
-        int m = t1.length();
-        int n = t2.length();
-
-        int[][] dp = new int[m+1][n+1];
-
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (t1.charAt(i-1) == t2.charAt(j-1)) {
-                    dp[i][j] = dp[i-1][j-1] + 1;
-                } else {
-                    dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j]);
-                }
-            }
-        }
-        System.out.println(dp[m][n]);
-
-//        System.out.println(longestCommonSubsequence(t1, t2));
+        System.out.println(longestCommonSubsequence(t1, t2));
     }
 
     public static int longestCommonSubsequence(String text1, String text2) {
@@ -72,7 +51,6 @@ public class Main {
                 }
             }
         }
-
         return dp[m][n];
     }
 }
