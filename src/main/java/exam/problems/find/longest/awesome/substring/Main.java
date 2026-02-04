@@ -33,6 +33,7 @@ public class Main {
         Arrays.fill(pos, n);
         pos[0] = -1;
         int ans = 0;
+        // 前缀异或和
         int pre = 0;
         for (int i = 0; i < n; i++) {
             pre ^= 1 << (s.charAt(i) - '0');
