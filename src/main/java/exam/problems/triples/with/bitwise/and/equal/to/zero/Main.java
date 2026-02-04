@@ -5,6 +5,8 @@ import java.util.Scanner;
 /**
  * <a href="https://pintia.cn/problem-sets/2004497865353367552/exam/problems/type/7?problemSetProblemId=2004497865374339080">
  *     7.09 按位与为零的三元组</a>
+ * <a href="https://leetcode.cn/problems/triples-with-bitwise-and-equal-to-zero/description/">
+ *     982. 按位与为零的三元组</a>
  *
  * @author lihuagang
  */
