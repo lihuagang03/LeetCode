@@ -11,11 +11,13 @@ public class Solution {
         if (s == null || s.isEmpty()) {
             return 0;
         }
+        // 提示：s 由英文字母、数字、符号和空格组成
         // 滑动窗口计数器
         int[] window = new int[128];
         // 最长子串 的长度
         int maxLen = 0;
 
+        // 左右指针
         int left = 0;
         int right = 0;
         int n = s.length();
