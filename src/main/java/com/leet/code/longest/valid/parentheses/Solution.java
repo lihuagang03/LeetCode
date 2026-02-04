@@ -43,8 +43,8 @@ public class Solution {
 
         // 计算最长子串的长度
         int ans = 0;
-        for (int dpi : dp) {
-            ans = Math.max(ans, dpi);
+        for (int v : dp) {
+            ans = Math.max(ans, v);
         }
         return ans;
     }
