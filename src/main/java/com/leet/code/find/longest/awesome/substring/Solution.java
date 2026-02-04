@@ -10,6 +10,7 @@ import java.util.Arrays;
  */
 public class Solution {
     // s 中的字符种类数
+    // s 仅由数字组成
     private static final int D = 10;
 
     public int longestAwesome(String s) {
@@ -17,22 +18,20 @@ public class Solution {
             return 0;
         }
         int n = s.length();
+
         int[] pos = new int[1 << D];
-        // n 表示没有找到异或前缀和
         Arrays.fill(pos, n);
-        // pre[-1] = 0
         pos[0] = -1;
         int ans = 0;
         int pre = 0;
         for (int i = 0; i < n; i++) {
-            pre ^= 1 << (s.charAt(i) - '0');
+            int v = s.charAt(i) - '0';
+            pre = pre ^ (1 << v);
+            // s 仅由数字组成
             for (int j = 0; j < D; j++) {
-                // 奇数
                 ans = Math.max(ans, i - pos[pre ^ (1 << j)]);
             }
-            // 偶数
             ans = Math.max(ans, i - pos[pre]);
-            // 首次遇到值为 pre 的前缀异或和，记录其下标 i
             if (pos[pre] == n) {
                 pos[pre] = i;
             }
