@@ -15,9 +15,11 @@ public class Solution {
         for (int num : arr) {
             if (!stack.isEmpty() && num < stack.getLast()) {
                 int head = stack.removeLast();
+                // 移除堆栈中所有比 num 小的数
                 while (!stack.isEmpty() && num < stack.getLast()) {
                     stack.removeLast();
                 }
+                // 只保留比 num 大的数
                 stack.addLast(head);
             } else {
                 stack.addLast(num);
